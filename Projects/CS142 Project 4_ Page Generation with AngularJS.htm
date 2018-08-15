@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://web.stanford.edu/class/cs142/project4.html -->
+<html class="gr__web_stanford_edu"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>CS142 Project 4: Page Generation with AngularJS</title>
+    <meta name="description" content="Web Applications course at Stanford University">
+
+    <link rel="stylesheet" href="./CS142 Project 4_ Page Generation with AngularJS_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./CS142 Project 4_ Page Generation with AngularJS_files/main.css">
+
+    <link href="./CS142 Project 4_ Page Generation with AngularJS_files/css" rel="stylesheet" type="text/css">
+
+    <script src="./CS142 Project 4_ Page Generation with AngularJS_files/jquery.min.js"></script> 
+    <script src="./CS142 Project 4_ Page Generation with AngularJS_files/bootstrap.min.js"></script>
+
+</head>
+
+
+  <body data-gr-c-s-loaded="true">
+
+    <header>
+
+  <nav class="navbar">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://web.stanford.edu/class/cs142/index.html">CS142 (Spring 2018)</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          
+            
+            
+            <li class="">
+              <a href="http://web.stanford.edu/class/cs142/index.html">Home</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="http://web.stanford.edu/class/cs142/info.html">Class Info</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="http://web.stanford.edu/class/cs142/lectures.html">Lectures</a> 
+            </li>
+          
+            
+            
+            <li class="nav-active">
+              <a href="http://web.stanford.edu/class/cs142/projects.html">Projects</a> 
+            </li>
+          
+            
+            
+            <li class="">
+              <a href="http://web.stanford.edu/class/cs142/staff.html">Staff</a> 
+            </li>
+          
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+</header>
+
+
+    
+
+        <main><div class="container">
+
+	<h1>CS142 Project 4: Page Generation with AngularJS</h1>
+	<h4 class="text-muted">Due: Thursday, May 3, 2018 at 11:59 PM</h4>
+
+	<section>
+		<h3 class="left-border">Setup</h3>
+		<p>
+			You should already have installed Node.js and the npm package manager your system. 
+			If not, follow the <a href="http://web.stanford.edu/class/cs142/install.html">installation instructions</a> now.
+		</p>
+		<p>
+			Create a directory <code>project4</code> and extract the contents of <a href="http://web.stanford.edu/class/cs142/downloads/project4.zip">
+			this zip file</a> into the directory. The zip file contains the starter files for this assignment.
+		</p>
+		<p>
+			This assignment requires a few node modules (e.g. <a href="http://jshint.com/about">JSHint</a> 
+			and <a href="http://expressjs.com/">ExpressJS</a>) that you can fetch by running the following 
+			command in the <code>project4</code> directory: </p><pre> npm install </pre> This will also fetch 
+			<a href="https://angularjs.org/">AngularJS</a> into the <code>node_modules</code> subdirectory 
+			even though we will be loading it into the browser rather than Node.js.
+		<p></p>
+		<p>
+			Like the previous assignments you will be able to run JSHint on all the project's JavaScript files 
+			by running the command: </p><pre>npm run jshint</pre> The code you submit should start with 
+			<code>"use strict";</code> and run JShint without warnings.
+		<p></p>
+		<p>
+			Your solutions for all of the problems below should be implemented in the <code>project4</code> directory. 
+		</p>
+		<p>
+			This project uses <a href="https://angularjs.org/">AngularJS</a>, a
+			popular framework for building web applications. The project's goal
+			is to get you enough up to speed with AngularJS and the cs142's coding
+			conventions that you
+			will be able to build a web application with it in the next project.
+		</p>
+		<p>
+			Although AngularJS is written in JavaScript and runs in the browser
+			we can not continue running from the local file system as we did in
+			the previous projects. AngularJS handles much of the loading of the
+			HTML for you and if you think about things from a security point of view
+			the fact that your browser won't let random JavaScript code read files on the local
+			file system is a good thing. The result is we will need to stand up a simple
+			web server to serve your project files to your browser.
+		</p>
+		<p>
+			Fortunately, Node.js is a really good environment for writing simple web servers.
+			We provided one that can be started with the command from the <code>project4</code> directory:
+			</p><pre>node webServer.js</pre>
+		<p></p>
+		<p>
+			All the files in the <code>project4</code> can be fetched using an URL starting with
+			<a href="http://localhost:3000/">http://localhost:3000</a>.  Click on
+			<a href="http://localhost:3000/">http://localhost:3000</a> to verify your
+			web server is running. It should serve the file <code>index.html</code> to your browser.
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Getting Started</h3>
+		<p>
+			In this project we require that you use the model, view, controller pattern described in class.
+			There are many ways of organizing code under this pattern so we provide an example that both
+			demonstrates some basic AngularJS features as well as showing the file system layout and module
+			pattern we would like you to follow in your projects.
+		</p>
+		<p>
+			You should start by opening the example in your browser by navigating to the URL
+			<a href="http://localhost:3000/getting-started.html">http://localhost:3000/getting-started.html</a>.
+			The page displays examples of Angular in action.
+			You should look through the this web page since it shows with
+			HTML statements we will be used to run an Angular web application along with explanatory comments.
+		</p>
+		<p>
+			Angular directly supports the model, view, and controller pattern we want. The line in
+			<code>getting-started.html</code> containing 
+		</p> 
+		<pre>&lt;html ng-app="cs142App" ng-controller="MainController"&gt;</pre> 
+		<p>
+			effectively turns the contents of <code>getting-started.html</code> into an Angular template and starts the
+			function <code>MainController</code> (found in <code>mainController.js</code>) as the controller for it.
+		</p>
+		<p>
+			To build reusable components we adopt a file organization that co-locates the template HTML, CSS,
+			and controller of the component in a subdirectory of a directory named <code>components</code>.
+			This can be seen in <code>getting-started.html</code> in the line:
+		</p> 
+		<pre>&lt;div ng-include="'components/example/exampleTemplate.html'" ng-controller="ExampleController"&gt;&lt;/div&gt;</pre> 
+		<p>
+			that replaces the div elements with the HTML from <code>exampleTemplate.html</code> operating 
+			under the controller <code>ExampleController</code>. The lines in the <code>head</code> section:
+		</p>
+		<pre>&lt;script src="components/example/exampleController.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" type="text/css" href="components/example/example.css" /&gt;</pre>
+		<p>
+			read in the ExampleController and the stylesheet for the component.  You should use this
+			pattern and file naming convention for the other components you build for the class.
+		</p>
+		<p>
+			Model data is typically fetched from the web server which retrieves the data from a database.
+			To avoid having to setup a database for this project we will give you an HTML script tag
+			to load the model data directly into the browser's DOM from the local file system.
+			The models will appear in the DOM under the property name <code>cs142models</code>. You will be
+			able to access it under the name <code>window.cs142models</code> in an AngularJS controller.
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Problem 1: Understand and update the example view (5 points)</h3>
+		<p>
+			You should look through and understand the <code>getting-started.html</code> and
+			the <code>example</code> component. To demonstrate your understanding do the
+			following:
+		</p>
+		<ol>
+			<li>Update the model data for the example component to use your name rather than "Unknown name". 
+			You should find where "Unknown name" is and replace it. <strong>This is the only place where you 
+			are allowed to enter your name.</strong></li>
+			<li>Replace the <code>div</code> region with the class <code>header</code> in <code>getting-started.html</code>
+			with your own design for a header 
+			that displays your name and a short (up to 20 characters) motto. You must include some styling for 
+			this header in <code>main.css</code>.</li>
+
+			<li>Extend the example component so it allows the user to update the motto being displayed. The
+			widget you use to perform the update should be placed in the <code>div</code> with the class
+			<code>motto-update</code> in the example template file. 
+			<ul>
+				<li> Note that the example component uses a different scope and controller than the main component.
+				The example component's scope is a child of the main's scope and so uses 
+				JavaScript prototypical inheritance.</li>
+				<li><strong>The div with the class <code>header</code> should remain in <code>getting-started.html</code>.</strong></li> 
+				<li>The <code>window.cs142models.exampleModel</code> data should remain in the example component. You should not have window.cs142models.exampleModel anywhere outside ExampleController.</li>
+				<li>Like the user's name, the initial value for <code>motto</code> should come in with the model data.</li>
+			</ul>
+		</li></ol>
+	</section>
+
+	<section>
+		<h3 class="left-border">Problem 2: Create a new component - states view (10 points)</h3>
+		<p>
+			Create a new component view that will display the names of all states
+			containing a given substring. Your view must implement an input field
+			which accepts a substring. The view will display in
+			alphabetical order a <strong>list</strong> of all states whose names contain the given substring
+			(ignoring differences in case).  For example, the view for the substring of "al"
+			should list the states Alabama, Alaska, and California. The page should also display the
+			substring that was used to filter the states. If there are no
+			matching states then the web page should display a message indicating
+			that fact (rather than just showing nothing). All states should be displayed when the substring is empty.
+		</p>
+		<p>
+			As in Problem #1 we provide you the model data with states.  It can
+			be accessed via <code>window.cs142models.states</code> after it is included with:
+		</p>
+		<pre>&lt;script src="modelData/states.js"&gt;&lt;/script&gt;</pre>
+		<p>
+			See <code>states.js</code> for a description of the format of the states data.
+		</p>
+		<p>
+			To help you get started and guide you to the file naming conventions we
+			want you to use we provided a file <code>p2.html</code> that will load
+			and display your component like <code>getting-started.html</code> does
+			for the example component. You can open this file in your browser via
+			the URL <a href="http://localhost:3000/p2.html">http://localhost:3000/p2.html</a>.
+		</p>
+		<p>
+			The files you will need to implement are:
+			</p><ul>
+				<li><code>components/states/statesTemplate.html</code> - The Angular HTML
+				template of your states component.</li>
+				<li><code>components/states/statesController.js</code> - The controller of
+				your component. It should be added to the <code>cs142App</code> under the
+				name <code>StatesController</code>.</li>
+				<li><code>components/states/states.css</code> - Any CSS styles your component
+				needs. <strong>You must include some styling for your state list here.</strong></li>
+			</ul>
+			We give a start with these files that add the Angular controller to the application.
+		<p></p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Problem 3: Personalizing the Layout (5 points)</h3>
+		<p>
+			Create a component that will display a personalized
+			header at the top of a page. Add this header to all 
+            pages in your assignment (<code>getting-started.html</code>, <code>p2.html</code>,
+            <code>p4.html</code>, <code>p5.html</code>). This header is in addition to the header from part 1 - do not replace that header.
+            Use your imagination and creativity to
+			create a header that is "uniquely you". This can include additional images,
+			graphics, whatever you like.  You can extend the JavaScript in the controller
+			 but you may not use external JavaScript libraries such
+			as JQuery. Be creative!  
+		</p>
+        <p>
+            The files you will need to implement are:
+			</p><ul>
+				<li><code>components/header/headerTemplate.html</code> - The Angular HTML
+				template of your header component.</li>
+				<li><code>components/header/headerController.js</code> - The controller of
+				your component. It should be added to the <code>cs142App</code> under the
+				name <code>HeaderController</code>.</li>
+				<li><code>components/header/header.css</code> - Any CSS styles your component
+				needs. <strong>You must include some styling for your header here.</strong></li>
+			</ul>
+	    Note: <code>getting-started.html</code> should have 2 headers: the personalized header from Problem 3 at he top of the page and the header with the motto from Problem 1.2 right below it. All other pages(<code>p2.html</code>,
+            <code>p4.html</code> and <code>p5.html</code>) should only have your personalized header from Problem 3.
+        <p></p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Problem 4: Add dynamic switching of the views (10 points)</h3>
+		<p>
+		Create a <code>p4.html</code> that includes both view components
+		(the <code>example</code> and <code>states</code> view components). The
+		<code>p4.html</code> template and its <code>MainController</code> needs
+		to implement an ability to switch between the display of the two components.
+		When a view is displayed there should be a button above it that switches
+		to display the other view.  For example, when the <code>states</code> view
+		is displayed the button above it should read "Switch to example," and when
+		pushed the <code>states</code> should disappear and the <code>example</code>
+		view should be displayed.
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Problem 5: Single page app (5 points)</h3>
+		<p>
+		Although the approach taken in Problem 4 allows you to switch between
+		the two views, it does not allow you to bookmark or share a URL pointing
+		at a particular view.  Even doing a browser refresh event causes the app to
+		lose track of which view was being displayed.
+		</p>
+		<p>
+		We can address this deficiency by storing the view information into the URL.
+		Angular provides a module that makes this easy to do. For this Problem make a
+		copy of your <code>p4.html</code> solution into a file named <code>p5.html</code>
+		and convert it to use Angular's
+		<a href="https://docs.angularjs.org/api/ngRoute">ngRoute</a> module
+		to switch between the two component views. You should have a <strong>styled toolbar-like
+		control</strong> (simple plain text links are not sufficient) that will allow the user to switch bewteen the example and states
+		component views.
+		</p>
+		<p>
+		Since this is the first Angular module we import we provide you with step-by-step
+		instructions.
+		</p>
+		<ol>
+			<li>Angular keeps modules in separate files so you will need to
+			explicitly load the ngRoute module using a script element in the head
+			section of <code>p5.html</code> like so:
+			<pre>&lt;script src="node_modules/angular-route/angular-route.min.js"&gt;&lt;/script&gt;</pre>
+			</li>
+			<li>We need to inform our angular application that it needs ngRoute by
+			adding it to the currently empty dependency list by changing the
+			angular.module called in <code>mainController.js</code> to:
+			<pre>var cs142App = angular.module('cs142App', ['ngRoute']);</pre>
+			Note that once you modify the dependencies, any HTML page using <code>mainController.js</code>
+			must also have the ngRoute module loaded into the head section.
+			</li>
+			<li>Rather than uses ng-if conditions to control the different views,
+			you can simply add a <code>div</code> element with an attribute of ng-view.
+			The ngRoute module will insert the component view into this region.
+			<pre>&lt;div ng-view&gt;&lt;/div&gt;</pre>
+			</li>
+			<li>We now need to configure the <code>$routeProvider</code> to know about
+			the mappings from URLs to view comments.  The following code added to
+			the <code>mainController.js</code> will do this.
+<pre>cs142App.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/example', {
+        templateUrl: 'components/example/exampleTemplate.html',
+        controller: 'ExampleController'
+      }).
+      when('/states', {
+        templateUrl: 'components/states/statesTemplate.html',
+        controller: 'StatesController'
+      }).
+      otherwise({
+        redirectTo: '/example'
+      });
+  }]);
+</pre>
+			</li>
+			<li>To access the views you need to specify the fragment on the URL.  For example:
+<pre>&lt;a href="#!example"&gt;Example&lt;/a&gt;
+&lt;a href="#!states"&gt;States&lt;/a&gt;
+</pre>
+			</li>
+      <li><strong>Make sure you check that Problems #1-4 still work with your updated</strong>
+            <code>mainController.js</code>. In particular, you'll have to load the ngRoute module into the other 3 HTML files using a script like you did for <code>p5.html</code>.
+			</li>
+		</ol>
+	</section>
+    
+    <section>
+    	<h3 class="left-border">Style (5 points)</h3>
+		<p>
+		These points will be awarded if your solutions have proper MVC decomposition and follow
+		the Angular style guidelines discussed in lecture and section. <strong>Note that you should not directly 
+    manipulate the DOM in your code. Use Angular's directives to achieve the functionality you want.</strong>
+		In addition, your code and templates must be clean and readable.
+		Remember to run JSHint before submitting. JSHint should raise no errors.
+		</p>
+	</section>
+
+	<section>
+		<h3 class="left-border">Deliverables</h3>
+		<p>
+			<strong>After implementing part 5, make sure parts 1 through 4 still work!</strong>
+		</p>
+		<p>
+		Use the standard class <a href="http://web.stanford.edu/class/cs142/submit.html">submission mechanism</a>
+		to submit the entire application (everything in the <code>project4</code>
+		directory).
+		</p>
+	</section>
+
+</div>
+</main>
+
+    
+
+    <footer>
+  <div class="container text-center">
+    <small class="text-muted">
+    	Designed by Raymond Luong for CS142 at Stanford University
+    	<br>
+    	Powered by <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> – <a href="http://web.stanford.edu/class/cs142/website.html"><strong>learn more</strong></a>
+    </small>
+  </div>
+</footer>
+
+
+  
+
+
+<div id="diigo-video-capture" style="display: none;"><div id="diigo-video-capture-container"><div id="diigo-video-capture-logo"></div>Capture</div></div><div id="diigo-video-capture-wrapper"><div id="diigo-video-capture-wrapper-tip">Drag to outliner or <span id="diigo-video-capture-upload">Upload</span></div><div id="diigo-video-capture-wrapper-close">Close</div></div><div id="diigo-chrome-installed" style="display: none;"></div></body></html>
