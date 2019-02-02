@@ -45,7 +45,7 @@ processScriptFromFile('./cs142-make-multi-filter.js');
 processScriptFromFile('./cs142-template-processor.js');
 
 console.log('*** Running tests ....');
-processScriptFromFile('./cs142-test-project2.js');
+processScriptFromFile('./cs142-test-project2_corrected.js');
 
 var p1Message = global.cs142Project2Results.p1Message;
 var p2Message = global.cs142Project2Results.p2Message;
